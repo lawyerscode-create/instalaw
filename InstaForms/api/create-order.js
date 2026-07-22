@@ -1,9 +1,5 @@
 const Razorpay = require("razorpay");
 
-// Server-side price list — the source of truth. Keep this in sync with
-// the "price" field you added to each form in forms-data.js.
-// (Duplicating it here means a user editing browser JS can never change
-// what they're actually charged.)
 const PRICES = {
   "sale-deed": 29,
   "rent-lease-agreement": 99,
@@ -41,45 +37,52 @@ const PRICES = {
   "gst-registration-form": 49,
   "itr-filing": 49,
   "passport-application": 59
-  // ← adjust individual prices here, in rupees
 };
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({
+      error: "Method not allowed"
+    });
   }
-
-  const { slug } = req.body || {};
-  const price = PRICES[slug];
-
-  if (!slug || !price) {
-    return res.status(400).json({ error: "Unknown form" });
-  }
-
-  const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET,
-  });
 
   try {
-    const order = await razorpay.orders.create({
-      amount: price * 100, // Razorpay expects paise, not rupees
-      currency: "INR",
-      receipt: `instaforms_${slug}_${Date.now()}`,
-      notes: { form: slug },
+    const { slug } = req.body || {};
+    const price = PRICES[slug];
+
+    if (!slug || !price) {
+      return res.status(400).json({
+        error: "Unknown form"
+      });
+    }
+
+    const razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET
     });
 
-    res.status(200).json({
+    const order = await razorpay.orders.create({
+      amount: price * 100,
+      currency: "INR",
+      receipt: `instaforms_${slug}_${Date.now()}`,
+      notes: {
+        form: slug
+      }
+    });
+
+    return res.status(200).json({
       orderId: order.id,
       amount: order.amount,
       currency: order.currency,
-      keyId: process.env.RAZORPAY_KEY_ID, // public key, safe to send
+      keyId: process.env.RAZORPAY_KEY_ID
     });
-  } catch (err) {
-    console.error("RAZORPAY ERROR:", err);
 
-return res.status(500).json({
-  error: "Could not create order",
-  details: err.message,
-  razorpayError: err.error || null
-});
+  } catch (err) {
+    console.error("CREATE ORDER ERROR:", err);
+
+    return res.status(500).json({
+      error: "Could not create order",
+      details: err.message
+    });
+  }
+};
