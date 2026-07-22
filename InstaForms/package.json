@@ -2,6 +2,7 @@
   "name": "instaforms",
   "version": "1.0.0",
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "razorpay": "^2.9.4"
   }
 }
