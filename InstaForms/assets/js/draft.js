@@ -93,8 +93,32 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slug }),
       });
-      const order = await orderRes.json();
-      if (!orderRes.ok) throw new Error(order.error || "Could not start payment");
+   const responseText = await orderRes.text();
+
+console.log("Create Order Status:", orderRes.status);
+console.log("Create Order Response:", responseText);
+
+if (!orderRes.ok) {
+  let errorMessage = "Could not start payment";
+
+  try {
+    const errorData = JSON.parse(responseText);
+    errorMessage = errorData.error || errorData.message || errorMessage;
+  } catch (parseError) {
+    errorMessage = responseText || errorMessage;
+  }
+
+  throw new Error(errorMessage);
+}
+
+let order;
+
+try {
+  order = JSON.parse(responseText);
+} catch (parseError) {
+  console.error("Invalid JSON from create-order:", responseText);
+  throw new Error("Server returned an invalid response. Please try again.");
+}
 
       const options = {
         key: order.keyId,
