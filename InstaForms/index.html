@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>InstaForms — The Legal Forms Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,900;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <svg class="crest" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 4L32 58" stroke="#e9cd86" stroke-width="1.5"/>
+      <path d="M14 12L50 12" stroke="#e9cd86" stroke-width="1.5"/>
+      <path d="M14 12L8 26C8 26 12 32 20 32C28 32 32 26 32 26L14 12Z" stroke="#e9cd86" stroke-width="1.3"/>
+      <path d="M50 12L44 26C44 26 48 32 56 32C64 32 32 26 32 26" stroke="#e9cd86" stroke-width="0"/>
+      <path d="M50 12L56 26C56 26 52 32 44 32C36 32 32 26 32 26L50 12Z" stroke="#e9cd86" stroke-width="1.3"/>
+      <path d="M20 58L44 58" stroke="#e9cd86" stroke-width="1.5"/>
+      <rect x="24" y="52" width="16" height="4" rx="1" fill="#e9cd86"/>
+    </svg>
+    <span class="eyebrow">Est. for India's law students, interns &amp; clients</span>
+    <h1>Insta<em>Forms</em></h1>
+    <div class="hero-rule"></div>
+<p class="tagline">
+India's Professional Legal Drafting Platform for Lawyers,
+Law Students, Legal Interns & Clients.
+Generate Court-Ready Documents in Minutes.
+</p>   <div class="hero-actions">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<a href="#library" class="btn solid">
+📚 Browse Legal Forms
+</a>
+
+
+</div>
+<div class="hero-features">
+
+  <div class="feature-card">
+    <h3>100+</h3>
+    <p>Legal Forms</p>
+  </div>
+
+  <div class="feature-card">
+    <h3>PDF</h3>
+    <p>Download Ready</p>
+  </div>
+
+  <div class="feature-card">
+    <h3>Word</h3>
+    <p>Editable Files</p>
+  </div>
+
+  <div class="feature-card">
+    <h3>AI</h3>
+    <p>Smart Drafting</p>
+  </div>
+
+</div>
+
+</div>
+
+<div class="scroll-cue">
+  <span class="line"></span>
+  Browse the shelves
+</div>
+
+</section>
+
+<!-- INTRO -->
+<section class="intro" id="about">
+  <span class="eyebrow">The Reading Room</span>
+  <h2 style="margin-top:14px;">Every shelf, a subject of law.</h2>
+  <p>InstaForms organises the drafts Indian legal interns and clients reach for most — property, family, criminal, civil, corporate, consumer, labour and tax matters — the way a chamber library would: by subject, spine by spine. Click a title to see what it's for, what you'll need on hand, and where to get the official format.</p>
+  <div class="stat-row">
+    <div class="stat"><div class="num">8</div><div class="label">Shelves of Law</div></div>
+    <div class="stat"><div class="num">40+</div><div class="label">Drafts Indexed</div></div>
+    <div class="stat"><div class="num">100%</div><div class="label">Free to Browse</div></div>
+  </div>
+</section>
+
+<!-- LIBRARY -->
+<section class="library" id="library">
+  <div class="library-head">
+    <div>
+      <span class="eyebrow">The Library</span>
+      <h2 style="margin-top:10px;">Browse by shelf</h2>
+    </div>
+    <div class="search-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e9cd86" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input id="searchInput" type="text" placeholder="Search a form, e.g. 'bail'…" autocomplete="off">
+    </div>
+  </div>
+
+  <div class="shelves" id="shelves"></div>
+  <p class="no-results" id="noResults">No forms found on any shelf for that search.</p>
+</section>
+
+<footer>
+  <div class="foot-brand">InstaForms</div>
+  <div>A study aid for legal interns &amp; a starting point for clients — not a substitute for advice from a practising advocate.</div>
+  <div class="disclaimer">Descriptions are general guidance only. Formats, court fees, stamp duty and procedure vary by state and change over time — always verify against the current official source linked in each entry, and have a qualified advocate review any document before filing or signing.</div>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <span class="m-eyebrow" id="modalShelf"></span>
+    <h3 id="modalTitle"></h3>
+    <div class="m-act" id="modalAct"></div>
+    <p class="desc" id="modalDesc"></p>
+    <div class="m-section-title">You'll typically need</div>
+    <ul class="checklist" id="modalChecklist"></ul>
+    <div class="m-buttons">
+      <a class="btn-primary" id="modalLink" href="#" target="_blank" rel="noopener">Get the official format ↗</a>
+      <button class="btn-secondary" id="modalClose2">Close</button>
+    </div>
+    <p class="m-source-note" id="modalSourceNote"></p>
+  </div>
+</div>
+
+<script src="assets/js/script.js"></script>
+</body>
+</html>
