@@ -76,7 +76,10 @@ module.exports = async (req, res) => {
       keyId: process.env.RAZORPAY_KEY_ID, // public key, safe to send
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Could not create order" });
-  }
-};
+    console.error("RAZORPAY ERROR:", err);
+
+return res.status(500).json({
+  error: "Could not create order",
+  details: err.message,
+  razorpayError: err.error || null
+});
