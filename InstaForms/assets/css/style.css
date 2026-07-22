@@ -732,3 +732,24 @@
 .site-disclaimer strong {
   color: #e9cd86;
 }
+.free-forms-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin: 25px auto;
+  padding: 14px 25px;
+  max-width: 500px;
+  border: 1px solid #c6a04a;
+  background: #1a120c;
+  color: #e9cd86;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.free-forms-banner span {
+  color: #c6a04a;
+  font-size: 18px;
+}
