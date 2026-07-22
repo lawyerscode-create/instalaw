@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Draft — InstaForms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,900;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mahogany-950:#1a120c; --mahogany-900:#241811; --mahogany-800:#3a2517;
+    --brass:#c6a04a; --brass-light:#e9cd86; --brass-dim:#8a7038;
+    --parchment:#f3e9d4; --parchment-dim:#d9caa6; --ink:#1c140d; --leather:#5e1f1f;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--mahogany-950); color:var(--parchment); font-family:'EB Garamond', serif; font-size:17px; line-height:1.6;}
+  h1,h2,h3{font-family:'Playfair Display', serif; margin:0;}
+  a{color:inherit;}
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;
+    padding:18px 28px; border-bottom:1px solid rgba(198,160,74,.25);
+    background:linear-gradient(180deg, var(--mahogany-900), var(--mahogany-950));
+    position:sticky; top:0; z-index:10;
+  }
+  .brand{font-family:'Playfair Display'; font-weight:700; font-size:20px; color:var(--brass-light); text-decoration:none;}
+  .brand em{font-style:italic;}
+  .toolbar{display:flex; gap:10px; flex-wrap:wrap;}
+  .back-link{
+    font-family:'IBM Plex Mono'; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--parchment-dim); text-decoration:none; border:1px solid var(--brass-dim);
+    padding:9px 16px; border-radius:2px; transition:background .2s, color .2s;
+  }
+  .back-link:hover{background:var(--brass); color:var(--mahogany-950);}
+  .tool-btn{
+    font-family:'IBM Plex Mono'; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
+    background:transparent; color:var(--brass-light); border:1px solid var(--brass);
+    padding:9px 16px; border-radius:2px; cursor:pointer; transition:background .2s, color .2s;
+  }
+  .tool-btn:hover{background:var(--brass); color:var(--mahogany-950);}
+
+  .page-head{max-width:880px; margin:40px auto 0; padding:0 24px;}
+  .eyebrow{font-family:'IBM Plex Mono'; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--brass-light);}
+  .page-head h1{font-size:clamp(28px,4vw,40px); margin:10px 0 6px;}
+  .page-head .act-line{font-family:'IBM Plex Mono'; font-size:13px; color:var(--parchment-dim);}
+
+  .paper-wrap{max-width:880px; margin:32px auto 70px; padding:0 24px;}
+  .paper{
+    background:linear-gradient(180deg, var(--parchment) 0%, #ece0c4 100%);
+    color:var(--ink); border-radius:4px; padding:48px 52px;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6), 0 0 0 1px var(--brass);
+  }
+  .paper h2{font-size:20px; text-align:center; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;}
+  .paper .sub-center{text-align:center; font-size:14px; color:#6b5a3c; margin-bottom:26px; font-family:'IBM Plex Mono';}
+  .paper p{margin:0 0 14px;}
+  .paper .filled{color:var(--leather); font-weight:600; border-bottom:1px dotted #8a7038; padding-bottom:1px;}
+  .paper .filled:empty::after{content:"_______"; color:#8a7038; font-weight:400;}
+  .paper ol.clauses{padding-left:22px; margin:0 0 14px;}
+  .paper ol.clauses li{margin-bottom:12px;}
+  .paper .divider{border:none; border-top:1px solid rgba(28,20,13,.2); margin:26px 0;}
+  .paper .signature-block{display:flex; justify-content:space-between; gap:24px; margin-top:40px; flex-wrap:wrap;}
+  .paper .sig-col{flex:1; min-width:200px;}
+  .paper .sig-line{border-top:1px solid var(--ink); margin-top:46px; padding-top:6px; font-size:13.5px; color:#6b5a3c;}
+  .paper table.field-table{width:100%; border-collapse:collapse; margin:8px 0 20px;}
+  .paper table.field-table th, .paper table.field-table td{
+    border:1px solid rgba(28,20,13,.25); padding:9px 12px; text-align:left; font-size:15.5px; vertical-align:top;
+  }
+  .paper table.field-table th{background:rgba(28,20,13,.06); width:38%; font-weight:600;}
+  .note-box{background:rgba(94,31,31,.06); border-left:3px solid var(--leather); padding:14px 18px; font-size:14.5px; color:#4a3a26; margin:22px 0;}
+
+  .loading-msg, .error-msg{max-width:760px; margin:60px auto; padding:0 24px; text-align:center; color:var(--parchment-dim);}
+  footer{border-top:1px solid rgba(198,160,74,.2); padding:34px 24px; text-align:center; color:var(--parchment-dim); font-size:13px;}
+
+  @media print{
+    .topbar, footer{display:none;}
+    body{background:#fff;}
+    .paper-wrap{margin:0; max-width:none; padding:0;}
+    .paper{box-shadow:none; border-radius:0; padding:20px;}
+    .page-head{display:none;}
+    .paper .filled{color:#000; border-bottom:none;}
+  }
+  @media (max-width:640px){
+    .paper{padding:28px 20px;}
+    .topbar{padding:14px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="index.html">Insta<em>Forms</em></a>
+  <div class="toolbar">
+    <a class="back-link" id="editLink" href="#">← Edit Details</a>
+    <button class="tool-btn" onclick="window.print()">Print / Save PDF</button>
+    <button class="tool-btn" id="copyBtn">Copy Text</button>
+  </div>
+</div>
+
+<div id="pageHead" class="page-head" style="display:none;">
+  <span class="eyebrow" id="shelfLabel"></span>
+  <h1 id="formTitle"></h1>
+  <div class="act-line" id="actLabel"></div>
+</div>
+
+<div id="loadingMsg" class="loading-msg">Loading draft…</div>
+<div id="errorMsg" class="error-msg" style="display:none;">
+  This draft couldn't be found. <a href="index.html#library" style="color:var(--brass-light);">Return to the library</a> and pick a form from a shelf.
+</div>
+
+<div class="paper-wrap">
+  <div class="paper" id="draftContent" style="display:none;"></div>
+</div>
+
+<footer>InstaForms — standard reference draft, not a substitute for advice from a practising advocate. Have it reviewed before filing or signing.</footer>
+
+<script src="assets/js/forms-data.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="assets/js/draft.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fill in the Details — InstaForms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,900;1,600&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --mahogany-950:#1a120c; --mahogany-900:#241811; --mahogany-800:#3a2517;
+    --mahogany-700:#4d3120; --brass:#c6a04a; --brass-light:#e9cd86; --brass-dim:#8a7038;
+    --parchment:#f3e9d4; --parchment-dim:#d9caa6; --ink:#1c140d; --leather:#5e1f1f;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--mahogany-950); color:var(--parchment); font-family:'EB Garamond', serif; font-size:17px; line-height:1.6;}
+  h1,h2{font-family:'Playfair Display', serif; margin:0;}
+  a{color:inherit;}
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px;
+    padding:18px 28px; border-bottom:1px solid rgba(198,160,74,.25);
+    background:linear-gradient(180deg, var(--mahogany-900), var(--mahogany-950));
+    position:sticky; top:0; z-index:10;
+  }
+  .brand{font-family:'Playfair Display'; font-weight:700; font-size:20px; color:var(--brass-light); text-decoration:none;}
+  .brand em{font-style:italic;}
+  .back-link{
+    font-family:'IBM Plex Mono'; font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--parchment-dim); text-decoration:none; border:1px solid var(--brass-dim);
+    padding:9px 16px; border-radius:2px; transition:background .2s, color .2s;
+  }
+  .back-link:hover{background:var(--brass); color:var(--mahogany-950);}
+
+  .page-head{max-width:760px; margin:40px auto 0; padding:0 24px;}
+  .eyebrow{font-family:'IBM Plex Mono'; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--brass-light);}
+  .page-head h1{font-size:clamp(26px,4vw,36px); margin:10px 0 6px;}
+  .page-head .act-line{font-family:'IBM Plex Mono'; font-size:13px; color:var(--parchment-dim);}
+  .page-head .lede{font-size:16px; color:var(--parchment-dim); margin-top:14px;}
+
+  .form-wrap{max-width:760px; margin:30px auto 70px; padding:0 24px;}
+  .field-card{
+    background:rgba(198,160,74,.05); border:1px solid rgba(198,160,74,.25); border-radius:6px;
+    padding:34px 32px;
+  }
+  .field-group{margin-bottom:20px;}
+  .field-group label{
+    display:block; font-family:'IBM Plex Mono'; font-size:12.5px; letter-spacing:.04em;
+    text-transform:uppercase; color:var(--brass-light); margin-bottom:8px;
+  }
+  .field-group input, .field-group textarea{
+    width:100%; background:rgba(0,0,0,.25); border:1px solid var(--brass-dim); color:var(--parchment);
+    font-family:'EB Garamond'; font-size:16.5px; padding:11px 14px; border-radius:3px; outline:none;
+  }
+  .field-group textarea{min-height:90px; resize:vertical; font-family:'EB Garamond';}
+  .field-group input:focus, .field-group textarea:focus{border-color:var(--brass-light);}
+
+  .form-actions{display:flex; gap:14px; margin-top:28px; flex-wrap:wrap;}
+  .btn-generate{
+    font-family:'IBM Plex Mono'; font-size:13px; letter-spacing:.08em; text-transform:uppercase;
+    background:var(--brass-light); color:var(--mahogany-950); border:none; padding:15px 30px;
+    border-radius:3px; cursor:pointer; transition:background .2s ease;
+  }
+  .btn-generate:hover{background:#f2dd9e;}
+  .btn-clear{
+    font-family:'IBM Plex Mono'; font-size:13px; letter-spacing:.06em; text-transform:uppercase;
+    background:transparent; color:var(--parchment-dim); border:1px solid var(--brass-dim); padding:15px 22px;
+    border-radius:3px; cursor:pointer;
+  }
+  .btn-clear:hover{color:var(--parchment); border-color:var(--brass-light);}
+
+  .loading-msg, .error-msg{max-width:760px; margin:60px auto; padding:0 24px; text-align:center; color:var(--parchment-dim);}
+  footer{border-top:1px solid rgba(198,160,74,.2); padding:34px 24px; text-align:center; color:var(--parchment-dim); font-size:13px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="index.html">Insta<em>Forms</em></a>
+  <a class="back-link" href="index.html#library">← Back to Library</a>
+</div>
+
+<div id="pageHead" class="page-head" style="display:none;">
+  <span class="eyebrow" id="shelfLabel"></span>
+  <h1 id="formTitle"></h1>
+  <div class="act-line" id="actLabel"></div>
+  <p class="lede">Fill in the details below — nothing leaves your browser until you choose to print or save. Your entries are kept only on this device, so you can safely come back and edit them later.</p>
+</div>
+
+<div id="loadingMsg" class="loading-msg">Loading form…</div>
+<div id="errorMsg" class="error-msg" style="display:none;">
+  This form couldn't be found. <a href="index.html#library" style="color:var(--brass-light);">Return to the library</a> and pick a form from a shelf.
+</div>
+
+<div class="form-wrap">
+  <form id="fieldForm" class="field-card" style="display:none;" novalidate>
+    <div id="fieldsContainer"></div>
+    <div class="form-actions">
+      <button type="submit" class="btn-generate">Generate Draft →</button>
+      <button type="button" class="btn-clear" id="clearBtn">Clear Saved Details</button>
+    </div>
+  </form>
+</div>
+
+<footer>InstaForms — standard reference drafts, not a substitute for advice from a practising advocate.</footer>
+
+<script src="assets/js/forms-data.js"></script>
+<script src="assets/js/form-fill.js"></script>
+</body>
+</html>
