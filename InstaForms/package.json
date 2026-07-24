@@ -1,0 +1,31 @@
+{
+  "name": "instaforms",
+  "version": "1.0.0",
+  "description": "India's Professional Legal Drafting Platform for Lawyers, Law Students, Legal Interns & Clients",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve .",
+    "validate": "echo 'No build process - static HTML site'"
+  },
+  "keywords": [
+    "legal",
+    "forms",
+    "india",
+    "drafting"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "vercel": {
+    "analytics": {
+      "enabled": true,
+      "implementation": "script-tag",
+      "note": "Using script tag approach as recommended for vanilla HTML projects per https://vercel.com/docs/analytics/quickstart"
+    }
+  }
+}
