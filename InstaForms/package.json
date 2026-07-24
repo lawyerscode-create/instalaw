@@ -16,8 +16,9 @@
   ],
   "author": "",
   "license": "ISC",
-  "devDependencies": {},
-  "dependencies": {},
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  },
   "engines": {
     "node": ">=14.0.0"
   },
@@ -25,7 +26,10 @@
     "analytics": {
       "enabled": true,
       "implementation": "script-tag",
-      "note": "Using script tag approach as recommended for vanilla HTML projects per https://vercel.com/docs/analytics/quickstart"
+      "note": "Using script tag approach as recommended for vanilla HTML projects per https://vercel.com/docs/analytics/quickstart",
+      "installed": true,
+      "package": "@vercel/analytics@^2.0.1",
+      "pages": ["index.html", "form-fill.html", "draft.html"]
     }
   }
 }
