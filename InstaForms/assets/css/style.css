@@ -711,3 +711,24 @@
 .search-btn:hover {
     background: #ddb95d;
 }
+.site-disclaimer {
+  width: 100%;
+  padding: 20px 30px;
+  margin-top: 40px;
+  border-top: 1px solid rgba(198, 160, 74, 0.25);
+  background: #1a120c;
+  color: #d9caa6;
+  text-align: center;
+  font-family: 'EB Garamond', serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.site-disclaimer p {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.site-disclaimer strong {
+  color: #e9cd86;
+}
